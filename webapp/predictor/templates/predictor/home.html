@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Iris Flower Classifier</title>
+    <link rel="stylesheet" href="{% static 'predictor/style.css' %}">
+</head>
+
+<body>
+
+<div class="main-container">
+
+    <div class="card">
+
+        <h1>Iris Flower Classification</h1>
+
+        <p class="description">
+            Enter flower measurements below to predict the species using a trained Logistic Regression model.
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <label>Sepal Length (cm)</label>
+            <input type="number" step="any" name="sepal_length" required>
+
+            <label>Sepal Width (cm)</label>
+            <input type="number" step="any" name="sepal_width" required>
+
+            <label>Petal Length (cm)</label>
+            <input type="number" step="any" name="petal_length" required>
+
+            <label>Petal Width (cm)</label>
+            <input type="number" step="any" name="petal_width" required>
+
+            <button type="submit">Predict Species</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result">
+                <h2>{{ prediction|title }}</h2>
+            </div>
+        {% endif %}
+
+    </div>
+
+    <footer>
+        Built with Django + Scikit-Learn | Akshat Raj
+    </footer>
+
+</div>
+
+</body>
+</html>
